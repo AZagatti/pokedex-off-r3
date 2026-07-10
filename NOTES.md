@@ -27,3 +27,13 @@
 - GitHub Actions workflow for CI/CD (lint, check, build, deploy to Pages)
 - Committed all code to main branch and pushed to GitHub
 - Initial workflow run attempted (pending Pages configuration)
+
+**2026-07-10 02:15** — Fixed all TypeScript errors (10 resolved):
+
+- stores.ts: Fixed writable store update callback (use update() not set())
+- PokemonImage: Added back_default and front_shiny as optional props
+- +page.svelte: Fixed Promise.all type safety with proper casting
+- Detail pages: Guard against undefined route params
+- Pokemon detail: Fixed sprite variant type assertion in loop
+- All code passes: lint ✓, check (TypeScript) ✓, build ✓
+- GitHub Actions workflow ready (deploy to Pages pending completion)
