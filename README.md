@@ -78,17 +78,21 @@ npm run test           # Run all tests
 ## Screenshots
 
 ### Home Page — Pokédex List
+
 ![Pokédex List](./docs/screenshots/home-loaded.png)
 
 ### Berries Page
+
 ![Berries](./docs/screenshots/berries-page.png)
 
 ### Favorites Page
+
 ![Favorites](./docs/screenshots/favorites-empty.png)
 
 ## Architecture
 
 See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) for detailed information about:
+
 - Data flow and API caching strategy
 - Component structure
 - Route organization
@@ -97,6 +101,7 @@ See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) for detailed information abou
 ## Design Decisions
 
 See [docs/DECISIONS.md](./docs/DECISIONS.md) for rationale behind key choices:
+
 - Why SvelteKit + Svelte 5 Runes
 - Static adapter with SPA fallback
 - Zod validation approach

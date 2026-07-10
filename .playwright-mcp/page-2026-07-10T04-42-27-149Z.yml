@@ -1,29 +1,29 @@
 - generic [ref=f1e3]:
-  - banner [ref=f1e4]:
-    - navigation [ref=f1e5]:
-      - link "Pokédex" [ref=f1e6] [cursor=pointer]:
-        - /url: /
-      - generic [ref=f1e7]:
-        - link "Pokémon" [ref=f1e8] [cursor=pointer]:
-          - /url: /
-        - link "Berries" [ref=f1e9] [cursor=pointer]:
-          - /url: /berries
-        - link "Favorites" [ref=f1e10] [cursor=pointer]:
-          - /url: /favorites
-        - button "Toggle theme" [ref=f1e11]
-  - main [ref=f1e14]:
-    - generic [ref=f1e15]:
-      - generic [ref=f1e16]:
-        - generic [ref=f1e17]:
-          - textbox "Search Pokémon..." [ref=f1e18]
-          - combobox [ref=f1e19]:
-            - 'option "Sort by Dex #" [selected]'
-            - option "Sort by Stats"
-        - heading "Generations" [level=3] [ref=f1e21]
-        - heading "Types" [level=3] [ref=f1e23]
-      - paragraph [ref=f1e25]: No Pokémon found
-  - contentinfo [ref=f1e26]:
-    - paragraph [ref=f1e27]:
-      - text: Pokédex built with SvelteKit • Data from
-      - link "PokéAPI" [ref=f1e28] [cursor=pointer]:
-        - /url: https://pokeapi.co
+    - banner [ref=f1e4]:
+        - navigation [ref=f1e5]:
+            - link "Pokédex" [ref=f1e6] [cursor=pointer]:
+                - /url: /
+            - generic [ref=f1e7]:
+                - link "Pokémon" [ref=f1e8] [cursor=pointer]:
+                    - /url: /
+                - link "Berries" [ref=f1e9] [cursor=pointer]:
+                    - /url: /berries
+                - link "Favorites" [ref=f1e10] [cursor=pointer]:
+                    - /url: /favorites
+                - button "Toggle theme" [ref=f1e11]
+    - main [ref=f1e14]:
+        - generic [ref=f1e15]:
+            - generic [ref=f1e16]:
+                - generic [ref=f1e17]:
+                    - textbox "Search Pokémon..." [ref=f1e18]
+                    - combobox [ref=f1e19]:
+                        - 'option "Sort by Dex #" [selected]'
+                        - option "Sort by Stats"
+                - heading "Generations" [level=3] [ref=f1e21]
+                - heading "Types" [level=3] [ref=f1e23]
+            - paragraph [ref=f1e25]: No Pokémon found
+    - contentinfo [ref=f1e26]:
+        - paragraph [ref=f1e27]:
+            - text: Pokédex built with SvelteKit • Data from
+            - link "PokéAPI" [ref=f1e28] [cursor=pointer]:
+                - /url: https://pokeapi.co

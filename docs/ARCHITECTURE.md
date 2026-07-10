@@ -82,6 +82,7 @@ src/
 All API responses are cached in memory using a Map keyed by URL. This reduces network requests and improves perceived performance.
 
 **Cache Flow:**
+
 1. Client requests data via `fetchWithCache(url, schema)`
 2. Check if URL exists in cache
 3. If cached, return immediately
@@ -91,6 +92,7 @@ All API responses are cached in memory using a Map keyed by URL. This reduces ne
 7. Return validated data
 
 **Cache Invalidation:**
+
 - In-memory cache persists for the session
 - Cache is cleared on page reload
 - Future: Add TTL-based invalidation for stale data
@@ -98,11 +100,13 @@ All API responses are cached in memory using a Map keyed by URL. This reduces ne
 ## Component Architecture
 
 ### PokemonImage Component
+
 - Props: Pokemon object, sprite variant
 - Handles missing images gracefully
 - Supports multiple sprite variants (artwork, front, back, shiny)
 
 ### TypeBadge Component
+
 - Props: Type name, size
 - Type-specific colors using Tailwind
 - Responsive sizing
@@ -110,11 +114,13 @@ All API responses are cached in memory using a Map keyed by URL. This reduces ne
 ### Stores
 
 **Theme Store** (`src/lib/stores.ts`)
+
 - Manages light/dark mode
 - Persists to localStorage
 - Exports methods: `toggle()`, `set(theme)`
 
 **Favorites Store** (`src/lib/stores.ts`)
+
 - Manages favorited Pokémon IDs
 - Persists to localStorage
 - Exports methods: `toggle(id)`, `isFavorite(id)`
@@ -122,17 +128,20 @@ All API responses are cached in memory using a Map keyed by URL. This reduces ne
 ## Route Structure
 
 ### Static Routes
+
 - `/` — Home page (Pokédex list)
 - `/berries` — Berry list
 - `/favorites` — User favorites
 
 ### Dynamic Routes
+
 - `/pokemon/[name]` — Pokémon detail (client-rendered)
 - `/berries/[name]` — Berry detail (client-rendered)
 
 ## State Management
 
 **Svelte 5 Runes** are used for reactive state:
+
 ```typescript
 let pokemonCards = $state([]);  // Reactive array
 const colors = $derived(...);    // Computed value
@@ -142,6 +151,7 @@ $effect(() => {                 // Side effects
 ```
 
 **Svelte Stores** are used for global state:
+
 ```typescript
 import { theme, favorites } from '$lib/stores';
 theme.subscribe(value => { ... });  // Subscribe to changes
@@ -160,15 +170,16 @@ favorites.toggle(id);               // Mutate state
 ## Validation Strategy
 
 All API responses are validated using Zod schemas before use. This catches:
+
 - Missing required fields
 - Type mismatches
 - API response changes
 
 ```typescript
 export const PokemonSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  // ... more fields
+	id: z.number(),
+	name: z.string()
+	// ... more fields
 });
 
 const pokemon = await fetchWithCache(url, PokemonSchema);
