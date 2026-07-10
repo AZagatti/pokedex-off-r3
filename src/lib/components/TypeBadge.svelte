@@ -36,6 +36,8 @@
 	};
 </script>
 
-<span class={`inline-block rounded-full font-semibold capitalize ${colors.bg} ${colors.text} ${sizeClasses[size]}`}>
+<span
+	class={`inline-block rounded-full font-semibold capitalize ${colors.bg} ${colors.text} ${sizeClasses[size]}`}
+>
 	{type}
 </span>

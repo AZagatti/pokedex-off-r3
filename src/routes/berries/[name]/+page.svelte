@@ -11,8 +11,13 @@
 	let loading = $state(true);
 
 	async function loadData() {
+		const name = $page.params.name;
+		if (!name) {
+			loading = false;
+			return;
+		}
 		try {
-			const berry = await getBerry($page.params.name);
+			const berry = await getBerry(name);
 			data = { berry };
 		} catch (err) {
 			console.error('Failed to load berry:', err);
@@ -28,15 +33,14 @@
 
 {#if loading}
 	<div class="flex justify-center py-12">
-		<div class="h-12 w-12 animate-spin rounded-full border-4 border-gray-300 border-t-red-600"></div>
+		<div
+			class="h-12 w-12 animate-spin rounded-full border-4 border-gray-300 border-t-red-600"
+		></div>
 	</div>
 {:else if data.berry}
 	<div class="mx-auto max-w-2xl px-4 py-8">
 		<!-- Back button -->
-		<a
-			href="/berries"
-			class="mb-6 inline-flex items-center gap-2 text-red-600 hover:underline"
-		>
+		<a href="/berries" class="mb-6 inline-flex items-center gap-2 text-red-600 hover:underline">
 			<ArrowLeft size={20} />
 			Back to Berries
 		</a>
@@ -46,7 +50,9 @@
 
 		<!-- Details Grid -->
 		<div class="grid gap-6 md:grid-cols-2">
-			<div class="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
+			<div
+				class="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800"
+			>
 				<h2 class="mb-4 text-lg font-semibold">Properties</h2>
 				<div class="space-y-3">
 					<div>
@@ -65,7 +71,9 @@
 			</div>
 
 			{#if data.berry.flavors && data.berry.flavors.length > 0}
-				<div class="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
+				<div
+					class="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800"
+				>
 					<h2 class="mb-4 text-lg font-semibold">Flavors</h2>
 					<div class="space-y-2">
 						{#each data.berry.flavors as flavor}
@@ -80,7 +88,9 @@
 		</div>
 	</div>
 {:else}
-	<div class="rounded-lg border border-gray-200 bg-gray-50 p-12 text-center dark:border-gray-800 dark:bg-gray-800">
+	<div
+		class="rounded-lg border border-gray-200 bg-gray-50 p-12 text-center dark:border-gray-800 dark:bg-gray-800"
+	>
 		<p class="text-gray-600 dark:text-gray-400">Berry not found</p>
 	</div>
 {/if}

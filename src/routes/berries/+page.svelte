@@ -54,7 +54,9 @@
 	<h1 class="mb-8 text-3xl font-bold">Pokémon Berries</h1>
 
 	{#if berries.length === 0 && !loading}
-		<div class="rounded-lg border border-gray-200 bg-gray-50 p-12 text-center dark:border-gray-800 dark:bg-gray-800">
+		<div
+			class="rounded-lg border border-gray-200 bg-gray-50 p-12 text-center dark:border-gray-800 dark:bg-gray-800"
+		>
 			<p class="text-gray-600 dark:text-gray-400">No berries found</p>
 		</div>
 	{:else}
@@ -76,7 +78,9 @@
 
 		{#if loading}
 			<div class="mt-12 flex justify-center">
-				<div class="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-red-600"></div>
+				<div
+					class="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-red-600"
+				></div>
 			</div>
 		{/if}
 

@@ -8,6 +8,8 @@
 					};
 				};
 				front_default: string | null;
+				back_default?: string | null;
+				front_shiny?: string | null;
 			};
 			name: string;
 		};
@@ -19,7 +21,9 @@
 	const imageUrl = $derived.by(() => {
 		switch (variant) {
 			case 'artwork':
-				return pokemon.sprites.other?.official_artwork?.front_default || pokemon.sprites.front_default;
+				return (
+					pokemon.sprites.other?.official_artwork?.front_default || pokemon.sprites.front_default
+				);
 			case 'front':
 				return pokemon.sprites.front_default;
 			case 'back':
@@ -35,7 +39,5 @@
 {#if imageUrl}
 	<img src={imageUrl} alt={pokemon.name} class="mx-auto h-48 w-48 object-contain" />
 {:else}
-	<div class="flex h-48 w-48 items-center justify-center bg-gray-200 text-gray-500">
-		No image
-	</div>
+	<div class="flex h-48 w-48 items-center justify-center bg-gray-200 text-gray-500">No image</div>
 {/if}

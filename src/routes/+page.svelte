@@ -72,13 +72,13 @@
 				.catch(() => null)
 		);
 
-		[generations, typeList] = await Promise.all([
+		const [genResults, typeResults] = await Promise.all([
 			Promise.all(genPromises),
 			Promise.all(typePromises)
 		]);
 
-		generations = generations.filter((g) => g !== null);
-		typeList = typeList.filter((t) => t !== null);
+		generations = genResults.filter((g) => g !== null) as { id: string; name: string }[];
+		typeList = typeResults.filter((t) => t !== null) as string[];
 
 		// Initial load
 		await loadMorePokemon();
@@ -100,7 +100,9 @@
 						return {
 							id: details.id,
 							name: details.name,
-							image: details.sprites.other?.official_artwork?.front_default || details.sprites.front_default,
+							image:
+								details.sprites.other?.official_artwork?.front_default ||
+								details.sprites.front_default,
 							types: details.types.map((t) => t.type.name)
 						};
 					} catch {
@@ -109,7 +111,7 @@
 				})
 			);
 
-			pokemonCards = [...pokemonCards, ...newCards.filter((c) => c !== null)];
+			pokemonCards = [...pokemonCards, ...(newCards.filter((c) => c !== null) as PokemonCard[])];
 			offset += 30;
 			hasMore = result.next !== null;
 			applyFilters();
@@ -137,9 +139,7 @@
 
 		// Type filter
 		if (selectedTypes.length > 0) {
-			filtered = filtered.filter((p) =>
-				selectedTypes.some((type) => p.types.includes(type))
-			);
+			filtered = filtered.filter((p) => selectedTypes.some((type) => p.types.includes(type)));
 		}
 
 		// Sort
@@ -186,7 +186,9 @@
 
 <div class="mx-auto max-w-7xl px-4 py-8">
 	<!-- Search and Filters -->
-	<div class="sticky top-0 z-10 mb-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-800">
+	<div
+		class="sticky top-0 z-10 mb-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-800"
+	>
 		<div class="mb-4 flex flex-col gap-4 md:flex-row md:items-center">
 			<input
 				type="text"
@@ -251,7 +253,9 @@
 
 	<!-- Results -->
 	{#if filteredPokemon.length === 0 && !loading}
-		<div class="rounded-lg border border-gray-200 bg-gray-50 p-12 text-center dark:border-gray-800 dark:bg-gray-800">
+		<div
+			class="rounded-lg border border-gray-200 bg-gray-50 p-12 text-center dark:border-gray-800 dark:bg-gray-800"
+		>
 			<p class="text-gray-600 dark:text-gray-400">No Pokémon found</p>
 		</div>
 	{:else}
@@ -263,7 +267,9 @@
 				>
 					<div class="mb-4 flex items-start justify-between">
 						<div>
-							<p class="text-sm text-gray-600 dark:text-gray-400">#{String(pokemon.id).padStart(3, '0')}</p>
+							<p class="text-sm text-gray-600 dark:text-gray-400">
+								#{String(pokemon.id).padStart(3, '0')}
+							</p>
 							<h3 class="text-lg font-semibold capitalize">{pokemon.name}</h3>
 						</div>
 						<button
@@ -300,7 +306,9 @@
 
 		{#if loading}
 			<div class="mt-12 flex justify-center">
-				<div class="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-red-600"></div>
+				<div
+					class="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-red-600"
+				></div>
 			</div>
 		{/if}
 

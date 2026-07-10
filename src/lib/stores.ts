@@ -2,12 +2,14 @@ import { writable } from 'svelte/store';
 
 function createThemeStore() {
 	const storedTheme = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : 'light';
-	const { subscribe, set } = writable<'light' | 'dark'>(storedTheme === 'dark' ? 'dark' : 'light');
+	const { subscribe, set, update } = writable<'light' | 'dark'>(
+		storedTheme === 'dark' ? 'dark' : 'light'
+	);
 
 	return {
 		subscribe,
 		toggle: () => {
-			set((current) => {
+			update((current) => {
 				const newTheme = current === 'light' ? 'dark' : 'light';
 				if (typeof localStorage !== 'undefined') {
 					localStorage.setItem('theme', newTheme);
@@ -29,7 +31,9 @@ function createThemeStore() {
 
 function createFavoritesStore() {
 	const storedFavorites =
-		typeof localStorage !== 'undefined' ? JSON.parse(localStorage.getItem('favorites') || '[]') : [];
+		typeof localStorage !== 'undefined'
+			? JSON.parse(localStorage.getItem('favorites') || '[]')
+			: [];
 	const { subscribe, update } = writable<number[]>(storedFavorites);
 
 	return {

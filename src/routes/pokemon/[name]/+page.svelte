@@ -16,9 +16,10 @@
 	let spriteVariant: 'artwork' | 'front' | 'back' | 'shiny' = $state('artwork');
 	let loading = $state(true);
 
-	const pokemonName = $page.params.name;
+	const pokemonName = $page.params.name || '';
 
 	async function loadData() {
+		if (!pokemonName) return;
 		try {
 			const pokemon = await getPokemon(pokemonName);
 			const species = await getSpecies(pokemonName);
@@ -69,15 +70,14 @@
 
 {#if loading}
 	<div class="flex justify-center py-12">
-		<div class="h-12 w-12 animate-spin rounded-full border-4 border-gray-300 border-t-red-600"></div>
+		<div
+			class="h-12 w-12 animate-spin rounded-full border-4 border-gray-300 border-t-red-600"
+		></div>
 	</div>
 {:else if data.pokemon}
 	<div class="mx-auto max-w-4xl px-4 py-8">
 		<!-- Back button -->
-		<a
-			href="/"
-			class="mb-6 inline-flex items-center gap-2 text-red-600 hover:underline"
-		>
+		<a href="/" class="mb-6 inline-flex items-center gap-2 text-red-600 hover:underline">
 			<ArrowLeft size={20} />
 			Back to Pokédex
 		</a>
@@ -106,13 +106,15 @@
 		<div class="grid gap-8 md:grid-cols-2">
 			<!-- Left: Image and Sprites -->
 			<div>
-				<div class="rounded-lg border border-gray-200 bg-white p-8 dark:border-gray-700 dark:bg-gray-800">
+				<div
+					class="rounded-lg border border-gray-200 bg-white p-8 dark:border-gray-700 dark:bg-gray-800"
+				>
 					<PokemonImage pokemon={data.pokemon} variant={spriteVariant} />
 
 					<div class="mt-6 flex flex-wrap gap-2">
-						{#each ['artwork', 'front', 'back', 'shiny'] as variant}
+						{#each ['artwork', 'front', 'back', 'shiny'] as variant (variant)}
 							<button
-								onclick={() => (spriteVariant = variant)}
+								onclick={() => (spriteVariant = variant as 'artwork' | 'front' | 'back' | 'shiny')}
 								class={`rounded px-3 py-1 text-sm capitalize ${
 									spriteVariant === variant
 										? 'bg-red-600 text-white'
@@ -150,11 +152,15 @@
 
 				<!-- Dimensions -->
 				<div class="mb-6 grid grid-cols-2 gap-4">
-					<div class="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+					<div
+						class="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800"
+					>
 						<p class="text-sm text-gray-600 dark:text-gray-400">Height</p>
 						<p class="text-2xl font-bold">{(data.pokemon.height / 10).toFixed(1)} m</p>
 					</div>
-					<div class="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+					<div
+						class="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800"
+					>
 						<p class="text-sm text-gray-600 dark:text-gray-400">Weight</p>
 						<p class="text-2xl font-bold">{(data.pokemon.weight / 10).toFixed(1)} kg</p>
 					</div>
@@ -190,7 +196,9 @@
 								<li class="flex items-center gap-2">
 									<span class="capitalize">{ability.ability.name}</span>
 									{#if ability.is_hidden}
-										<span class="text-xs font-semibold text-yellow-600 dark:text-yellow-400">Hidden</span>
+										<span class="text-xs font-semibold text-yellow-600 dark:text-yellow-400"
+											>Hidden</span
+										>
 									{/if}
 								</li>
 							{/each}
@@ -206,7 +214,9 @@
 				<h2 class="mb-4 text-lg font-semibold">Example Moves</h2>
 				<div class="flex flex-wrap gap-2">
 					{#each data.pokemon.moves.slice(0, 8) as move}
-						<div class="rounded-lg border border-gray-200 bg-gray-50 px-3 py-1 dark:border-gray-700 dark:bg-gray-800">
+						<div
+							class="rounded-lg border border-gray-200 bg-gray-50 px-3 py-1 dark:border-gray-700 dark:bg-gray-800"
+						>
 							<p class="text-sm capitalize">{move.move.name}</p>
 						</div>
 					{/each}
@@ -235,7 +245,9 @@
 		{/if}
 	</div>
 {:else}
-	<div class="rounded-lg border border-gray-200 bg-gray-50 p-12 text-center dark:border-gray-800 dark:bg-gray-800">
+	<div
+		class="rounded-lg border border-gray-200 bg-gray-50 p-12 text-center dark:border-gray-800 dark:bg-gray-800"
+	>
 		<p class="text-gray-600 dark:text-gray-400">Pokémon not found</p>
 	</div>
 {/if}
